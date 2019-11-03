@@ -18,3 +18,4 @@ public class BulletinBoardSystemApplication extends SpringBootServletInitializer
     }
 
 }
+

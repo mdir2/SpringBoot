@@ -1,28 +1,40 @@
 package com.spring.boot.bbs.controller;
 
+import com.spring.boot.adapter.dto.NoticeDto;
+import com.spring.boot.adapter.dto.factory.NoticeDtoFactory;
+import com.spring.boot.adapter.notice.NoticeAdapter;
+import com.spring.boot.core.domain.Notice;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
+import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/notice")
+@RequestMapping("/notice/")
 public class NoticeController {
-    @GetMapping("/list")
-    public ResponseEntity<List<Map<String, Object>>> list() {
-        List<Map<String, Object>> list = new ArrayList<>();
-        MultiValueMap map = new LinkedMultiValueMap();
-        map.add("a", "a");
-        map.add("a", "b");
-        map.add("a", "c");
-        map.add("a", "d");
-        list.add(map);
-        return ResponseEntity.ok().body(list);
+
+    @Autowired
+    private NoticeAdapter noticeAdapter;
+
+    @GetMapping("")
+    public ResponseEntity<Map<String, Object>> list() {
+        Map<String, Object> resMap = new HashMap<>();
+        List<Notice> list = noticeAdapter.list();
+        resMap.put("datas", list);
+        return ResponseEntity.ok().body(resMap);
+    }
+
+    @GetMapping("{noticeId}")
+    public ResponseEntity<Map<String, Object>> detail(@Valid NoticeDto noticeDto) {
+        Map<String, Object> resMap = new HashMap<>();
+        Notice result = noticeAdapter.detail(NoticeDtoFactory.notice(noticeDto));
+        resMap.put("data", result);
+        return ResponseEntity.ok().body(resMap);
     }
 }
