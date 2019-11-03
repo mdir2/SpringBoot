@@ -16,13 +16,13 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/notice/")
+@RequestMapping("/notice")
 public class NoticeController {
 
     @Autowired
     private NoticeAdapter noticeAdapter;
 
-    @GetMapping("")
+    @GetMapping("/")
     public ResponseEntity<Map<String, Object>> list() {
         Map<String, Object> resMap = new HashMap<>();
         List<Notice> list = noticeAdapter.list();
@@ -30,7 +30,7 @@ public class NoticeController {
         return ResponseEntity.ok().body(resMap);
     }
 
-    @GetMapping("{noticeId}")
+    @GetMapping("/{noticeId}")
     public ResponseEntity<Map<String, Object>> detail(@Valid NoticeDto noticeDto) {
         Map<String, Object> resMap = new HashMap<>();
         Notice result = noticeAdapter.detail(NoticeDtoFactory.notice(noticeDto));
