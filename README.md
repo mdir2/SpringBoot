@@ -1,4 +1,4 @@
-# For Studying Spring Boot
+# For studying spring boot
 > boot-setting
 * How to setting spring boot
 > bbs
