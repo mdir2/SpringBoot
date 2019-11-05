@@ -23,7 +23,7 @@ public class NoticeRepository implements com.spring.boot.core.notice.boundary.No
     @Override
     public Notice detail(final Notice notice) {
         final String noticeId = notice.getNoticeId();
-        return this.notice(noticeJpaRepository.findById(noticeId).orElseThrow());
+        return this.notice(noticeJpaRepository.findById(noticeId).orElseGet(NoticeEntity.builder()::build));
     }
 
     private Notice notice(NoticeEntity noticeEntity) {
