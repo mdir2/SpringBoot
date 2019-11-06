@@ -1,5 +1,6 @@
 HELP.md
 target/
+*.MF
 
 ### STS ###
 .apt_generated
