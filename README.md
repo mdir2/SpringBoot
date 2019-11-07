@@ -1,6 +1,6 @@
 # For studying spring boot
-> boot-setting
+## __boot-setting__
 * How to setting spring boot
-> bbs
+## __bbs__
 * This is a common board with CRUD by JPA
 * I've been making this project using DDD
